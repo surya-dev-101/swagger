@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.test.swagger.dto.StudentDto;
+import com.test.swagger.exception.StudentNotFoundException;
 import com.test.swagger.mapper.StudentMapper;
 import com.test.swagger.repository.StudentRepository;
 import com.test.swagger.service.StudentService;
@@ -37,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto getStudentById(Long id) {
         return studentRepository.findById(id)
                 .map(studentMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     @Override
@@ -52,11 +53,13 @@ public class StudentServiceImpl implements StudentService {
                     }
                     return studentMapper.toDto(studentRepository.save(existingStudent));
                 })
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     @Override
     public void deleteStudent(Long id) {
+        if (!studentRepository.existsById(id))
+            throw new StudentNotFoundException(id);
         studentRepository.deleteById(id);
     }
 
