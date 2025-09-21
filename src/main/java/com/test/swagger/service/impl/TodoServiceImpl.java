@@ -36,11 +36,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoDto updateTodo(Long id) {
+    public TodoDto updateTodo(Long id, TodoDto todoDto) {
         return todoRepository.findById(id)
                 .map(todo -> {
-                    todo.setTitle(todo.getTitle());
-                    todo.setCompleted(todo.isCompleted());
+                    todo.setTitle(todoDto.getTitle());
+                    todo.setCompleted(todoDto.isCompleted());
                     return todoRepository.save(todo);
                 })
                 .map(todoMapper::toDto)

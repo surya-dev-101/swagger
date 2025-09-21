@@ -13,8 +13,8 @@ public class OpenAPIConfig {
     public OpenAPI customOpenApiConfig() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Student Management API")
-                        .description("API documentation for managing students")
+                        .title("API Management using Swagger")
+                        .description("API documentation created using Springdoc OpenAPI and Swagger UI")
                         .version("1.0.0"));
     }
 }

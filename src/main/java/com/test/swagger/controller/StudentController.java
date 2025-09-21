@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.swagger.dto.StudentDto;
-import com.test.swagger.service.impl.StudentServiceImpl;
+import com.test.swagger.service.StudentService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +28,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Student Management", description = "APIs for managing students data")
 public class StudentController {
 
-    private final StudentServiceImpl studentService;
+    private final StudentService studentService;
 
-    public StudentController(StudentServiceImpl studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
