@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/students")
@@ -32,6 +33,11 @@ public class StudentController {
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
+    }
+
+    @GetMapping("/hello") 
+    public String hello(HttpServletRequest request) {
+        return "Hello World" + request.getSession().getId();
     }
 
     @Operation(summary = "Add a new student", description = "Creates a new student record")
